@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Deepak",
+        "email": "deepak@gmail.com",
+        "password": "123456",
+        "role": "Employee",
+        "status": "Active"
+    },
+    {
+        "id": 2,
+        "name": "Robin",
+        "email": "robin@gmail.com",
+        "password": "1234567",
+        "role": "Employee",
+        "status": "Active"
+    },
+    {
+        "id": 3,
+        "name": "Harley",
+        "email": "harley@gmail.com",
+        "password": "12345678",
+        "role": "Employee",
+        "status": "Active"
+    }
+]
