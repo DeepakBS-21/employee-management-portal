@@ -14,16 +14,62 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");  
   const [showPassword, setShowPassword] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+const handleSubmit = (event) => {
+    event.preventDefault();
+
+
+    if(email === ""){
+        setEmailError("Email is required");
+        return;
+    }
+
+    const emailPattern = /\S+@\S+\.\S+/;
+
+    if(!emailPattern.test(email)){
+        setEmailError("Please enter a valid email address");
+        return;
+    }
+
+    if(password === ""){
+        setPasswordError("Password is required");
+        return; 
+    }
+
+    console.log("Email:", email);
+    console.log("Password:", password);
+
+    setLoading(true);
+
+    setTimeout(() => {
+
+        console.log("Login Successful");
+
+        setLoading(false);
+
+        setEmail("");
+        setPassword("");
+        setEmailError("");
+        setPasswordError("");
+    },2000) 
+};
 
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <TextField
         label="Email Address"
-        type="email"
+        type="text"
         fullWidth
         margin="normal"
         value={email}
-        onChange={(event) => setEmail(event.target.value)}
+        onChange={(event) => {setEmail(event.target.value);
+            setEmailError("");
+        }}
+        error={Boolean(emailError)}
+        helperText={emailError}
       />
 
       {/* Replace this Password TextField */}
@@ -33,7 +79,11 @@ function LoginForm() {
         fullWidth
         margin="normal"
         value={password}
-        onChange={(event) => setPassword(event.target.value)}
+        onChange={(event) => {setPassword(event.target.value);
+            setPasswordError("");
+        }}
+        error={Boolean(passwordError)}
+        helperText={passwordError}
         slotProps={{
           input: {
             endAdornment: (
@@ -51,12 +101,14 @@ function LoginForm() {
       />
 
       <Button
+        type="submit"
         variant="contained"
         fullWidth
         size="large"
         sx={{ mt: 3 }}
+        disabled={loading}
       >
-        Login
+        {loading? "Logging in..." : "Login"}
       </Button>
 
       <Typography
@@ -69,7 +121,7 @@ function LoginForm() {
       >
         Forgot Password?
       </Typography>
-    </>
+    </form>
   );
 }
 
