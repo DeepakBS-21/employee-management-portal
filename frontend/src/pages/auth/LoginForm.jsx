@@ -1,128 +1,111 @@
 import { useState } from "react";
 
 import {
-  Button,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Typography,
+Button,
+Typography,
 } from "@mui/material";
 
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import CustomInput from "./CustomInput";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");  
-  const [showPassword, setShowPassword] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [loading, setLoading] = useState(false);
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [showPassword, setShowPassword] = useState(false);
+const [emailError, setEmailError] = useState("");
+const [passwordError, setPasswordError] = useState("");
+const [loading, setLoading] = useState(false);
 
 const handleSubmit = (event) => {
-    event.preventDefault();
+event.preventDefault();
 
+if (email === "") {
+  setEmailError("Email is required");
+  return;
+}
 
-    if(email === ""){
-        setEmailError("Email is required");
-        return;
-    }
+const emailPattern = /\S+@\S+\.\S+/;
 
-    const emailPattern = /\S+@\S+\.\S+/;
+if (!emailPattern.test(email)) {
+  setEmailError("Please enter a valid email address");
+  return;
+}
 
-    if(!emailPattern.test(email)){
-        setEmailError("Please enter a valid email address");
-        return;
-    }
+if (password === "") {
+  setPasswordError("Password is required");
+  return;
+}
 
-    if(password === ""){
-        setPasswordError("Password is required");
-        return; 
-    }
+console.log("Email:", email);
+console.log("Password:", password);
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+setLoading(true);
 
-    setLoading(true);
+setTimeout(() => {
+  console.log("Login Successful");
 
-    setTimeout(() => {
+  setLoading(false);
 
-        console.log("Login Successful");
+  setEmail("");
+  setPassword("");
+  setEmailError("");
+  setPasswordError("");
+}, 2000);
 
-        setLoading(false);
-
-        setEmail("");
-        setPassword("");
-        setEmailError("");
-        setPasswordError("");
-    },2000) 
 };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        label="Email Address"
-        type="text"
-        fullWidth
-        margin="normal"
-        value={email}
-        onChange={(event) => {setEmail(event.target.value);
-            setEmailError("");
-        }}
-        error={Boolean(emailError)}
-        helperText={emailError}
-      />
+return (
+<form onSubmit={handleSubmit}>
+<CustomInput
+label="Email Address"
+type="text"
+value={email}
+onChange={(event) => {
+setEmail(event.target.value);
+setEmailError("");
+}}
+error={Boolean(emailError)}
+helperText={emailError}
+/>
 
-      {/* Replace this Password TextField */}
-      <TextField
-        label="Password"
-        type={showPassword ? "text" : "password"}
-        fullWidth
-        margin="normal"
-        value={password}
-        onChange={(event) => {setPassword(event.target.value);
-            setPasswordError("");
-        }}
-        error={Boolean(passwordError)}
-        helperText={passwordError}
-        slotProps={{
-          input: {
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={() => setShowPassword(!showPassword)}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            ),
-          },
-        }}
-      />
+  <CustomInput
+    label="Password"
+    type={showPassword ? "text" : "password"}
+    value={password}
+    onChange={(event) => {
+      setPassword(event.target.value);
+      setPasswordError("");
+    }}
+    error={Boolean(passwordError)}
+    helperText={passwordError}
+    isPassword={true}
+    showPassword={showPassword}
+    setShowPassword={setShowPassword}
+  />
 
-      <Button
-        type="submit"
-        variant="contained"
-        fullWidth
-        size="large"
-        sx={{ mt: 3 }}
-        disabled={loading}
-      >
-        {loading? "Logging in..." : "Login"}
-      </Button>
+  <Button
+    type="submit"
+    variant="contained"
+    fullWidth
+    size="large"
+    sx={{ mt: 3 }}
+    disabled={loading}
+  >
+    {loading ? "Logging in..." : "Login"}
+  </Button>
 
-      <Typography
-        align="center"
-        sx={{
-          mt: 2,
-          color: "primary.main",
-          cursor: "pointer",
-        }}
-      >
-        Forgot Password?
-      </Typography>
-    </form>
-  );
+  <Typography
+    align="center"
+    sx={{
+      mt: 2,
+      color: "primary.main",
+      cursor: "pointer",
+    }}
+  >
+    Forgot Password?
+  </Typography>
+</form>
+
+);
 }
 
 export default LoginForm;
