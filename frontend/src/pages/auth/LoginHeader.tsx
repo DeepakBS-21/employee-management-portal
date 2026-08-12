@@ -1,6 +1,11 @@
 import { Typography } from "@mui/material";
 
-function LoginHeader() {
+interface LoginHeaderProps {
+  title: string;
+  subtitle: string;
+}
+
+function LoginHeader({ title, subtitle }: LoginHeaderProps) {
   return (
     <>
       <Typography
@@ -8,7 +13,7 @@ function LoginHeader() {
         align="center"
         gutterBottom
       >
-        Employee Management Portal
+        {title}
       </Typography>
 
       <Typography
@@ -16,7 +21,7 @@ function LoginHeader() {
         align="center"
         color="text.secondary"
       >
-        Welcome Back!
+        {subtitle}
       </Typography>
     </>
   );

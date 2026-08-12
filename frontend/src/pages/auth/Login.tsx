@@ -7,12 +7,15 @@ import LoginHeader from "./LoginHeader";
 import LoginForm from "./LoginForm";
 
 function Login() {
-  return(
+  return (
     <Container maxWidth="sm">
-      <Card sx={{mt: 8}}>
+      <Card sx={{ mt: 8 }}>
         <CardContent>
-          <LoginHeader/>
-          <LoginForm/>
+          <LoginHeader
+            title="Employee Management Portal"
+            subtitle="Welcome Back!"
+          />
+          <LoginForm />
         </CardContent>
       </Card>
     </Container>
