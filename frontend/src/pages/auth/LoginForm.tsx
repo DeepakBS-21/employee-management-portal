@@ -62,6 +62,8 @@ function LoginForm() {
   }, 2000);
 };
 
+    console.log(email);
+
   return (
     <form onSubmit={handleSubmit}>
       <CustomInput

@@ -11,6 +11,7 @@ interface CustomInputProps {
   type: string;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
+  
   error: boolean;
   helperText: string;
   isPassword?: boolean;
