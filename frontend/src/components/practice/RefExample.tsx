@@ -21,7 +21,7 @@ function RefExample(){
             </button>
 
         </div>
-    )
+    );
 }
 
 export default RefExample;

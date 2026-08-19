@@ -59,10 +59,11 @@ function LoginForm() {
 
     setEmail("");
     setPassword("");
+
   }, 2000);
 };
 
-    console.log(email);
+    console.log(email); 
 
   return (
     <form onSubmit={handleSubmit}>
