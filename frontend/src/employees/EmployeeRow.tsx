@@ -1,4 +1,4 @@
-import type { Employee } from "../../data/employees";
+import type { Employee } from "../data/employees";
 import EmployeeActions from "./EmployeeActions";
 import StatusBadge from "./StatusBadge";
 import EmployeeAvatar from "./EmployeeAvatar";
@@ -29,7 +29,7 @@ function EmployeeRow({ employee }: EmployeeRowProps) {
         <div className="flex items-center gap-3">
 
           {/* Avatar */}
-          <EmployeeAvatar employee={employee} />
+          {/* <EmployeeAvatar employee={employee} /> */}
 
           {/* Full Name */}
           <span className="text-sm font-semibold text-slate-900">

@@ -1,4 +1,4 @@
-import type { Employee } from "../../data/employees";
+import type { Employee } from "../data/employees";
 import EmployeeRow from "./EmployeeRow";
 // Props reveived from EmployeePage.
 

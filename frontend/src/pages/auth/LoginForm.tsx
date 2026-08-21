@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
 import {
@@ -8,12 +9,14 @@ import {
 
 import CustomInput from "./CustomInput";
 
-const loginSchema =z.object({
+const loginSchema = z.object({
   email: z.email("Please enter a valid email address"),
   password: z.string().min(8, "Password is required"),
 });
 
 function LoginForm() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -22,48 +25,49 @@ function LoginForm() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (event: React.FormEvent) => {
-  event.preventDefault();
+    event.preventDefault();
 
-  setEmailError("");
-  setPasswordError("");
+    setEmailError("");
+    setPasswordError("");
 
-  const loginData = {
-    email,
-    password,
+    const loginData = {
+      email,
+      password,
+    };
+
+    const result = loginSchema.safeParse(loginData);
+
+    if (!result.success) {
+      result.error.issues.forEach((issue) => {
+        if (issue.path[0] === "email") {
+          setEmailError(issue.message);
+        }
+
+        if (issue.path[0] === "password") {
+          setPasswordError(issue.message);
+        }
+      });
+
+      return;
+    }
+
+    console.log("Valid login data:", result.data);
+
+    setLoading(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      console.log("Login Successful");
+
+      setLoading(false);
+
+      setEmail("");
+      setPassword("");
+
+      // Navigate to Employee Page
+      navigate("/employees");
+    }, 2000);
   };
-
-  const result = loginSchema.safeParse(loginData);
-
-  if (!result.success) {
-    result.error.issues.forEach((issue) => {
-      if (issue.path[0] === "email") {
-        setEmailError(issue.message);
-      }
-
-      if (issue.path[0] === "password") {
-        setPasswordError(issue.message);
-      }
-    });
-
-    return;
-  }
-
-  console.log("Valid login data:", result.data);
-
-  setLoading(true);
-
-  setTimeout(() => {
-    console.log("Login Successful");
-
-    setLoading(false);
-
-    setEmail("");
-    setPassword("");
-
-  }, 2000);
-};
-
-    console.log(email); 
 
   return (
     <form onSubmit={handleSubmit}>

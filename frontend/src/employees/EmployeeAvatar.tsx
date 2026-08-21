@@ -1,4 +1,4 @@
-import type { Employee } from "../../data/employees";
+import type { Employee } from "../data/employees";
 
 interface EmployeeAvatarProps {
   employee: Employee;

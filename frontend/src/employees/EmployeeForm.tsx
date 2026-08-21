@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../ui/Input";
 import Select from "../ui/Select";
 import Button from "../ui/Button";
@@ -34,6 +35,7 @@ function EmployeeForm({ onSubmit }: EmployeeFormProps) {
   /*
    * All form values are stored in one object.
    */
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<EmployeeFormData>({
     employeeId: "",
     firstName: "",
@@ -219,6 +221,14 @@ function EmployeeForm({ onSubmit }: EmployeeFormProps) {
       ========================== */}
 
       <div className="mt-10 flex justify-end gap-3 border-t border-slate-200 pt-6">
+        <Button
+          type="button"
+          variant="danger"
+          onClick={() => navigate("/employees")}
+        >
+          Cancel
+        </Button>
+
         <Button
           type="button"
           variant="secondary"

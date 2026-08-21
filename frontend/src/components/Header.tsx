@@ -7,13 +7,13 @@ function Header() {
 
       {/* Page title */}
       <div>
-        <h2 className="text-lg font-semibold text-slate-900">
-          Employee Management
-        </h2>
+        <h3 className="text-lg font-semibold text-slate-900">
+          Workforce Hub
+        </h3>
 
-        <p className="text-xs text-slate-500">
-          Manage your organization
-        </p>
+        {/* <p className="text-xs text-slate-500">
+          Employee Management Portal
+        </p> */}
       </div>
 
       {/* Right side of header */}

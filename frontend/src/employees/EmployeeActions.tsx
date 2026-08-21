@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Employee } from "../../data/employees";
+import type { Employee } from "../data/employees";
 
 // Props received from EmployeeTable.
 interface EmployeeActionsProps {
